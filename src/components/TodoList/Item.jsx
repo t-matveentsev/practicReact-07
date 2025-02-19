@@ -1,17 +1,16 @@
 import { FaStar } from "react-icons/fa";
 import s from "./TodoList.module.css";
 import { useDispatch } from "react-redux";
-import { deleteTodo, editTodo } from "../../redux/todo/todoSlice";
 import { useState } from "react";
+import { deleteTodo, editTodo } from "../../redux/operations";
 
-const Item = ({ isCompleted, todo, id, isFavorite }) => {
+const Item = ({ completed, todo, id, isFavorite }) => {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(todo);
   return (
     <li className={s.item}>
-      <input type="checkbox" checked={isCompleted} />
-      <p>
+      <div>
         {editMode ? (
           <div>
             <input
@@ -19,7 +18,7 @@ const Item = ({ isCompleted, todo, id, isFavorite }) => {
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onBlur={() => {
-                dispatch(editTodo({ id, todo: value }));
+                dispatch(editTodo({ id, completed, todo: value }));
                 setEditMode(false);
               }}
             />
@@ -31,7 +30,7 @@ const Item = ({ isCompleted, todo, id, isFavorite }) => {
             {""}
           </p>
         )}
-      </p>
+      </div>
       <div>
         <button>{isFavorite ? "Dislike" : "Like"}</button>
         <button onClick={() => setEditMode(true)}>Edit</button>

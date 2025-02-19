@@ -1,17 +1,14 @@
 import { Field, Form, Formik } from "formik";
 import s from "./TodoList.module.css";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../redux/todo/todoSlice";
+import { addTodo } from "../../redux/operations";
 
 const AddForm = () => {
   const initialValues = { todo: "" };
   const dispatch = useDispatch();
   const onSubmit = (values, options) => {
     const newTodo = {
-      id: crypto.randomUUID(),
       todo: values.todo,
-      isCompleted: false,
-      isFavorite: false,
     };
     dispatch(addTodo(newTodo));
     options.resetForm();
