@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { deleteTodo, editTodo } from "../../redux/operations";
 
-const Item = ({ completed, todo, id, isFavorite }) => {
+const Item = ({ completed, todo, id, edit, isFavorite }) => {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [value, setValue] = useState(todo);
@@ -33,7 +33,7 @@ const Item = ({ completed, todo, id, isFavorite }) => {
       </div>
       <div>
         <button>{isFavorite ? "Dislike" : "Like"}</button>
-        <button onClick={() => setEditMode(true)}>Edit</button>
+        <button onClick={edit}>Edit</button>
         <button onClick={() => dispatch(deleteTodo(id))}>Delete</button>
       </div>
     </li>
