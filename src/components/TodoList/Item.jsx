@@ -8,8 +8,14 @@ const Item = ({ completed, todo, id, edit, isFavorite }) => {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [value, setValue] = useState(todo);
+
+  const handleChange = () => {
+    dispatch(editTodo({ completed: !completed, todo, id }));
+  };
+
   return (
     <li className={s.item}>
+      <input type="checkbox" checked={completed} onChange={handleChange} />
       <div>
         {editMode ? (
           <div>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTodo, deleteTodo, fetchData, editTodo } from "../operations";
+import { addTodo, deleteTodo, fetchData, editTodo } from "./operations";
 
 const initialState = {
   item: [],
@@ -30,8 +30,12 @@ const slice = createSlice({
         state.item.push(action.payload);
       })
       .addCase(editTodo.fulfilled, (state, action) => {
-        const item = state.item.find((item) => item.id === action.payload.id);
-        item.todo = action.payload.todo;
+        const itemIndex = state.item.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        if (itemIndex !== -1) {
+          state.item[itemIndex] = action.payload;
+        }
       });
   },
 });

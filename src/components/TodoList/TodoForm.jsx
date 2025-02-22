@@ -1,6 +1,7 @@
+import s from "./TodoList.module.css";
 import { Field, Form, Formik } from "formik";
 
-const TodoForm = ({ initialValues, handleSubmit, text = "add" }) => {
+const TodoForm = ({ initialValues, handleSubmit }) => {
   return (
     <div>
       <Formik
@@ -8,9 +9,15 @@ const TodoForm = ({ initialValues, handleSubmit, text = "add" }) => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <Field name="todo" placeholder="placeholder" />
-          <button type="submit">{text}</button>
+        <Form className={s.formContainer}>
+          <Field
+            className={s.modalForm}
+            name="todo"
+            placeholder="your task, write here..."
+          />
+          <button className={s.modalBtn} type="submit">
+            Add task
+          </button>
         </Form>
       </Formik>
     </div>

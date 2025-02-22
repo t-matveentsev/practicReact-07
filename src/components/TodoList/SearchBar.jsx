@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import s from "./TodoList.module.css";
-import { setFilter } from "../../redux/filter/filterSlice";
+import { setFilter } from "../../redux/filterSlice";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
